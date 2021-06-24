@@ -15,7 +15,7 @@ import com.pastore.financas.model.entity.Usuario;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public class UsuarioRepositoryTest { 
 	
 	@Autowired
@@ -33,6 +33,19 @@ public class UsuarioRepositoryTest {
 		
 		//verificação
 		Assertions.assertThat(resultado).isTrue();
+	}
+	
+	@Test
+	public void retornaFalseQuandoNaoAchaUsuarioComEmail() {
+		
+		//cenario
+		repositorio.deleteAll();
+		
+		//ação/execução
+		boolean resultado = repositorio.existsByEmail("th@com");
+		
+		//verificação
+		Assertions.assertThat(resultado).isFalse();
 	}
 	
 	
